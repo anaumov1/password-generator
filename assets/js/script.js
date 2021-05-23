@@ -5,12 +5,7 @@
 var generateBtn = document.querySelector("#generate");
 
 //adding variables
-var passwordLength;
-var confirmLower;
-var confirmUpper;
-var confirmNumber;
-var confirmSpecial;
-var userChoises;
+
 
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
@@ -40,127 +35,111 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword() {
+var confirmLower;
+var confirmUpper;
+var confirmNumber;
+var confirmSpecial;
+var userChoices;
+var passwordLength;
+
   passwordLength = prompt ("Please enter the number of characters for your new password! Between 8 and 128.");
-  console.log("Password lenght " + passwordLength);
+  while (passwordLength !== parseInt(passwordLength, 10).toString()) {
+    alert ("You can only use whole numbers!");
+    passwordLength = prompt ("Enter number");
+    }
 
   if (!passwordLength) {
     alert("Required value");
 
   } else if (passwordLength < 8 || passwordLength > 128) {
     passwordLength = prompt("You must choose between 8 and 128");
-    console.log("Password lenght " + passwordLength);
+    while (passwordLength !== parseInt(passwordLength, 10).toString()) {
+      alert("You can only use numbers!");
+      passwordLength = prompt("Enter number");
+        }
 
   } else {
     confirmLower = confirm ("Does the new password need to contain lower case letters?");
-    console.log("Lower case " + confirmLower);
     confirmUpper = confirm ("Does the new password need to contain upper case letters?");
-    console.log("Upper case " + upperCase);
     confirmNumber = confirm ("Does the new password need to contain numbers?");
-    console.log("Number " + confirmNumber);
     confirmSpecial = confirm ("Does the new password need to contain special characters?");
-    console.log("Special Characters " + confirmSpecial);
-
   };
 
   //if all answers "no"
 
   if (!confirmLower && !confirmUpper && !confirmNumber && !confirmSpecial) {
-    userChoises = alert("You must choose at least one criteria");
+    userChoices = alert("You must choose at least one criteria");
+    return generatePassword();
 
     // if all answers "yes"
 
   } else if (confirmLower && confirmUpper && confirmNumber && confirmSpecial) {
-    userChoises = lowerCase.concat(upperCase, numbers, special);
-    console.log(userChoises);
+    userChoices = lowerCase.concat(upperCase, numbers, special);
   }
 
-  // partial user choises
+  // partial user Choices
   // if chooses 3 "yes"
 
   else if (confirmLower && confirmUpper && confirmNumber) {
-    userChoises = lowerCase.concat(upperCase, numbers);
-    console.log(userChoises);
+    userChoices = lowerCase.concat(upperCase, numbers);
   }
   else if (confirmLower && confirmUpper && confirmSpecial) {
-    userChoises = lowerCase.concat(upperCase, special);
-    console.log=(userChoises);
+    userChoices = lowerCase.concat(upperCase, special);
   }
   else if (confirmLower && confirmNumber && confirmSpecial) {
-    userChoises = lowerCase.concat(numbers, special);
-    console.log=(userChoises);
+    userChoices = lowerCase.concat(numbers, special);
   }
   else if (confirmUpper && confirmNumber && confirmSpecial) {
-    userChoises = upperCase.concat(numbers, special);
-    console.log=(userChoises);
+    userChoices = upperCase.concat(numbers, special);
   }
 
   // if 2 selected "yes"
 
   else if (confirmLower && confirmUpper) {
-    userChoises = lowerCase.concat(upperCase);
-    console.log=(userChoises);
+    userChoices = lowerCase.concat(upperCase);
   }
   else if (confirmLower && confirmNumber) {
-    userChoises = lowerCase.concat(numbers);
-    console.log=(userChoises);
+    userChoices = lowerCase.concat(numbers);
   }
   else if (confirmLower && confirmSpecial) {
-    userChoises = lowerCase.concat(special);
-    console.log=(userChoises);
+    userChoices = lowerCase.concat(special);
   }
   else if (confirmUpper && confirmNumber) {
-    userChoises = upperCase.concat(numbers);
-    console.log=(userChoises);
+    userChoices = upperCase.concat(numbers);
   }
   else if (confirmUpper && confirmSpecial) {
-    userChoises = upperCase.concat(special);
-    console.log=(userChoises);
+    userChoices = upperCase.concat(special);
   }
   else if (confirmNumber && confirmSpecial) {
-    userChoises = numbers.concat(special);
-    console.log=(userChoises);
+    userChoices = numbers.concat(special);
   }
 
   // if only 1 "yes"
 
   else if (confirmLower) {
-    userChoises = lowerCase;
-    console.log=(userChoises);
+    userChoices = lowerCase;
   }
   else if (confirmUpper) {
-    userChoises = blankUpper.concat(upperCase)
-    console.log=(userChoises);
+    userChoices = blankUpper.concat(upperCase)
   }
   else if (confirmNumber) {
-    userChoises = numbers;
-    console.log=(userChoises);
+    userChoices = numbers;
   }
   else if (confirmSpecial) {
-    userChoises = special;
-    console.log=(userChoises);
+    userChoices = special;
+  };
+
+  var passwordBlank = [];
+
+  for (var i = 0; i < passwordLength; i++) {
+    var allChoices = userChoices[Math.floor(Math.random() * userChoices.length)];
+    passwordBlank.push(allChoices);
   }
 
+// final password
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var password = passwordBlank.join("");
+console.log=("Your new password is: " + password);
+return password;
 
 }
