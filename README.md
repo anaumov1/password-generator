@@ -1,4 +1,4 @@
-# Password Generator Starter Code
+# Password Generator
 
 ## Created a random password generator usin JavaScript
 Original HTML and CSS provided by UT Bootcamp, made the password generator functional using JavaScript.
